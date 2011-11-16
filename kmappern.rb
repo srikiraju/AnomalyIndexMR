@@ -21,7 +21,9 @@ bucket = s3.buckets['/cs7960']
 word_count = {}
 STDIN.each_line do |line|
   line.chomp!
-  if line =~ /([a-zA-Z0-9]*\.txt)\s+1/
+  $stderr.puts line + ":"
+  if line =~ /([a-zA-Z0-9]*\.txt).*/
+    $stderr.puts $1 + ":"
     file = nil
     bucket.objects.with_prefix('NSFAbstractsSmall').each do |obj|
       if obj.key.include? $1
